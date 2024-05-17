@@ -7,17 +7,22 @@ function press(value) {
     result1.value += value;
 }
 
+function pressReplacing(value) {
+    var result1 = document.getElementById('result1');
+    result1.value = value;
+}
+
 function checkFirst() {
     var result1 = document.getElementById('result1');
     document.getElementById("yes/no1").innerHTML = "";
-    if (result1.value == 16){
+    if (result1.value == 'trijstūris'){
         answer = document.getElementById("yes/no1");
         answer.innerHTML = "Pareizi!";
         answer.style.color="green";
         testScore = testScore + 1;
     }else if (result1.value == ""){
         answer = document.getElementById("yes/no1");
-        answer.innerHTML = "Jūms vajag kaut ko ievadīt!";
+        answer.innerHTML = "Jums vajag kaut ko ievadīt!";
     } else {
         answer = document.getElementById("yes/no1");
         answer.innerHTML = "Nepareizi!";
@@ -33,19 +38,21 @@ function emptyFirst() {
 
 function checkSecond() {
     var result2 = document.getElementById('result2');
-    if (result2.value == "lg"){
+    if (result2.value == "9"){
         answer = document.getElementById("yes/no2");
         answer.innerHTML = "Pareizi!";
         answer.style.color="green";
         testScore = testScore + 1;
     } else if (result2.value == ""){
         answer = document.getElementById("yes/no2");
-        answer.innerHTML = "Jūms vajag kaut ko ievadīt!";
+        answer.innerHTML = "Jums vajag kaut ko ievadīt!";
         answer.style.color="red";
-    } else if (!isNaN(parseFloat(result2.value))){
+ } 
+    else if (!Number.isInteger(parseFloat(result2.value))){
         answer = document.getElementById("yes/no2");
-        answer.innerHTML = "Atbildei jābut pierakstītai ar burtiem!";
-    } else {
+        answer.innerHTML = "Atbildei jābut pierakstītai ar cipariem!";
+    } 
+    else {
         answer = document.getElementById("yes/no2");
         answer.innerHTML = "Nepareizi!";
         answer.style.color="red";
@@ -61,13 +68,12 @@ function emptySecond() {
 function checkThird() {
     var radioButton1 = document.getElementById("option1");
     var radioButton2 = document.getElementById("option2");
-    var radioButton3 = document.getElementById("option3");
 
-    if (!radioButton1.checked && !radioButton2.checked && !radioButton3.checked) {
+    if (!radioButton1.checked && !radioButton2.checked) {
         answer = document.getElementById("yes/no3");
-        answer.innerHTML = "Jūms vajag kaut ko izvēlēties!";
+        answer.innerHTML = "Jums vajag kaut ko izvēlēties!";
         answer.style.color="red";
-    } else if (radioButton3.checked == true){
+    } else if (radioButton1.checked == true){
         answer = document.getElementById("yes/no3");
         answer.innerHTML = "Pareizi!";
         answer.style.color="green";
@@ -82,20 +88,19 @@ function checkThird() {
 function emptyThird(){
     var radioButton1 = document.getElementById("option1");
     var radioButton2 = document.getElementById("option2");
-    var radioButton3 = document.getElementById("option3");
 
     radioButton1.checked = false;
     radioButton2.checked = false;
-    radioButton3.checked = false;
 
     answer = document.getElementById("yes/no3").innerHTML = ""
 }
 
 function checkFourth() {
     let correctAnswers = {
-        placeholder1: "(c - x)²",
-        placeholder2: "(c + x)²",
-        placeholder3: "(c - x)(c + x)"
+        placeholder1: "1",
+        placeholder2: "2",
+        placeholder3: "4",
+        placeholder4: "5"
     };
 
     let isCorrect = true;
@@ -116,7 +121,7 @@ function checkFourth() {
 }
 
 function emptyFourth() {
-    for (let i = 1; i <= 3; i++) { // i nedrikst but lielaks par pareizo atbilzu skaitu!
+    for (let i = 1; i <= 4; i++) { // i nedrikst but lielaks par pareizo atbilzu skaitu!
         let placeholder;
         try {
         placeholder = document.getElementById(`placeholder${i}`);
@@ -133,7 +138,7 @@ function emptyFourth() {
 }
 
 function checkFifth() {
-    let correctAnswers = ["16", "23", "17"];
+    let correctAnswers = ["4", "8", "12"];
     let checkboxes = document.querySelectorAll('input[name="answer"]');
     
     let checkedValues = [];
@@ -166,8 +171,6 @@ function emptyFifth() {
 // TESTA PARBAUDE
 function checkTest() {
     testScore = 0;
-    // const numberWords = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth',
-    // 'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth'];
     const questions = document.querySelectorAll('.question-box');
     var checkFunction;
     for (i = 0; i < questions.length; i++) {
