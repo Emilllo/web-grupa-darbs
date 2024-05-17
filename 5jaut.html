@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests</title>
+    <link rel = "">
+    <style>
+        .question{
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .question-text{
+            font-size: 20px;
+        }
+
+        .question-box {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .result-window {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .answer {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: move;
+        }
+
+        .placeholder {
+            width: 150px;
+            height: 50px;
+            border: 2px dashed #ccc;
+            margin: 5px;
+            display: inline-block;
+        }
+
+    </style>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="question-box">
+        <div class="question">Pirmais jautājums:</div>
+        <br>
+        <div class="question-text">8 / 2 * (2 + 2) = ?</div>
+        <br>
+        <label for="result1">Ievadiet atbildi ar pogām:</label>
+        <input class="result-window" type="text" id="result1" readonly>
+        <br>
+        <div></div>
+        <br>
+        <button class="button" onclick="press('1')">1</button>
+        <button class="button" onclick="press('2')">2</button>
+        <button class="button" onclick="press('3')">3</button>
+        <button class="button" onclick="press('4')">4</button>
+        <button class="button" onclick="press('5')">5</button>
+        <button class="button" onclick="press('6')">6</button>
+        <button class="button" onclick="press('7')">7</button>
+        <button class="button" onclick="press('8')">8</button>
+        <button class="button" onclick="press('9')">9</button>
+        <button class="button" onclick="press('0')">0</button>
+        <br>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no1"></div>
+        <br>
+        <!-- <button class="button" onclick="checkFirst()">Ievādīt</button> -->
+        <button class="button" onclick="emptyFirst()">Dzēst</button>
+    </div>
+
+    <div class = "question-box">
+        <div class = "question">Otrais jautājums:</div>
+        <br>
+        <div class="question-text">Kā ar matemātiskiem simboliem pierakstīt jēdzienu "decimāllogaritms"?</div>
+        <br>
+        <label for="result2">Ievadiet atbildi:</label>
+        <input class="result-window" type="text" id="result2" required class="question-input">
+        <br>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no2"></div>
+        <br>
+        <!-- <button class="button" onclick="checkSecond()">Ievādīt</button> -->
+        <button class="button" onclick="emptySecond()">Dzēst</button>
+    </div>
+
+    <div class = "question-box">
+        <div class = "question">Trešais jautājums:</div>
+        <br>
+        <div class="question-text">Nosaki taišņu A1D1 un AB savstarpējo novietojumu:</div>
+        <br>
+
+        <img src="https://ru-static.z-dn.net/files/d43/44942d8ce5a82395bc9664d9594e5a0a.jpg" height="300px"></img>
+        <br>
+        <br>
+        <div>Izveleties vienu:</div>
+        <form id="question3">
+            <input type="radio" id="option1" name="option" value="option1" class="question-input">
+            <label for="option1">Paralēlas</label><br>
+            <input type="radio" id="option2" name="option" value="option2" class="question-input">
+            <label for="option2">Krustiskas</label><br>
+            <input type="radio" id="option3" name="option" value="option3" class="question-input">
+            <label for="option3">Šķērsas</label><br>
+        </form>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no3" class="yes/no3"></div>
+        <br>
+        <!-- <button class="button" onclick="checkThird()">Ievādīt</button> -->
+        <button class="button" onclick="emptyThird()">Dzēst</button>
+    </div>
+    
+    <div class="question-box">
+        <div class="question">Ceturtais jautājums:</div>
+        <br>
+        <div class="question-text">Izvēlies pareizās atbildes! Izmanto visus dotos atbilžu variantus!</div>
+        <br>
+        <div>c² - 2cx + x² =</div>
+        <div id="placeholder1" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <br>
+        <div>c² + 2cx + x² =</div>
+        <div id="placeholder2" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <br>
+        <div>c² - x² =</div>
+        <div id="placeholder3" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <br>
+        <div>Atbilžu varianti:</div>
+        <div id="answers">
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer1">(c - x)(c + x)</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer2">(c - x)²</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer3">(c + x)²</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer4">(x - c)²</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer5">(c + c)²</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer6">(c + x)(x - x)</div>
+        </div>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no4"></div>
+        <br>
+        <!-- <button class="button" onclick="checkFourth()">Ievādīt</button> -->
+        <button class="button" onclick="emptyFourth()">Dzēst</button>
+    </div>
+
+    <div class="question-box">
+        <div class="question">Piektais jautājums:</div>
+        <br>
+        <div class="question-text">Izvēlies visus skaitļus, kas ir lielāki par 15</div>
+        <br>
+        <form id="questionForm">
+            <div class="answer">
+                <input type="checkbox" id="answer1" name="answer" value="16" class="question-input">
+                <label for="answer1">16</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer2" name="answer" value="23" class="question-input">
+                <label for="answer2">23</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer3" name="answer" value="17" class="question-input">
+                <label for="answer3">17</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer4" name="answer" value="14" class="question-input">
+                <label for="answer4">14</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer5" name="answer" value="12" class="question-input">
+                <label for="answer5">12</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer6" name="answer" value="10" class="question-input">
+                <label for="answer6">10</label>
+            </div>
+        </form>
+        <br>
+        <div id="yes/no5"></div>
+        <br>
+        <button class="button" onclick="emptyFifth()">Dzēst</button>
+    </div>
+    
+    <div hidden="true" class="results" id="result">
+        <h2></h2>
+    </div>
+
+    <button class="button" onclick="checkTest()">Iesniegt testu</button>
+    <button class="button" onclick="tryAgain()">Mēģināt vēlreiz</button>
+</body>
+</html>
