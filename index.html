@@ -3,9 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tests</title>
+    <link rel = "">
+    <style>
+        .question{
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .question-text{
+            font-size: 20px;
+        }
+
+        .question-box {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .result-window {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .answer {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: move;
+        }
+        .placeholder {
+            width: 150px;
+            height: 50px;
+            border: 2px dashed #ccc;
+            margin: 5px;
+            display: inline-block;
+        }
+        .placeholderHorizontal {
+            width: 150px;
+            height: 50px;
+            border: 2px dashed #ccc;
+            margin: 5px;
+            display: inline-block;
+        }
+        #chronometer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            background-color: gray;
+            border: 2px solid blue;
+            padding: 10px;
+        }
+
+    </style>
+    <script src="script.js"></script>
 </head>
+
 <body>
+    <div id="chronometer">00:00</div>
+    <script>
+        var chronometerDisplay = document.getElementById('chronometer')
+        var chronometer;
+        var seconds = 0;
+        var minutes = 0;
     
+        function startTimer() {
+    
+            chronometer = setInterval(function() {
+                seconds++;
+                if (seconds >= 60) {
+                    minutes++;
+                    seconds = 0;
+                }
+
+                chronometerDisplay.textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            }, 1000);
+        }
+    
+        function submitTest() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            clearInterval(chronometer);
+            checkTest();
+        }
+    
+        function retryTest() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            chronometerDisplay.textContent = '00:00';
+            tryAgain();
+            clearInterval(chronometer);
+            seconds = 0;
+            minutes = 0;
+            startTimer();
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            startTimer();
+            let placeholders = document.getElementsByClassName("placeholder");
+
+            var numbers = [];
+
+            for (let i = 0; i < placeholders.length; i++) {
+
+                let j = Math.floor(Math.random() * 101)+1;
+                numbers.push(j);
+            }
+    
+            for (let i = 1; i <= placeholders.length; i++) {
+                let draggableElement = document.getElementById(`answer${i}`);
+                draggableElement.innerText = numbers[i - 1];
+            }
+        });</script>
+    <div class="question-box" id="questionButtons">
+        <div class="question">Pirmais jautājums:</div>
+        <br>
+        <div class="question-text">Kā sauc ģeometrisku figūru ar 3 malām? (atbildi ievadīt ar pogu)</div>
+        <br>
+        <label for="result1">Jūsu atbilde:</label>
+        <input class="result-window" type="text" id="result1" readonly>
+        <br>
+        <div></div>
+        <br>
+        <button class="button" type="button" onclick="pressReplacing('trijstūris')" id="questionButton">trijstūris</button>
+        <button class="button" type="button" onclick="pressReplacing('kvadrāts')" id="questionButton">kvadrāts</button>
+        <button class="button" type="button" onclick="pressReplacing('divstūris')" id="questionButton">divstūris</button>
+        <br>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no1"></div>
+        <br>
+        <!-- <button class="button" onclick="checkFirst()">Ievādīt</button> -->
+        <button class="button" type="button" onclick="emptyFirst()" id="questionButton">Dzēst</button>
+    </div>
+
+    <div class = "question-box" id="questionTextField">
+        <div class = "question">Otrais jautājums:</div>
+        <br>
+        <div class="question-text">Kāds ir rezultāts, ja no 15 atņem 6?</div>
+        <br>
+        <label for="result2">Ievadiet atbildi:</label>
+        <input class="result-window" type="text" id="result2" required class="question-input">
+        <br>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no2"></div>
+        <br>
+        <!-- <button class="button" onclick="checkSecond()">Ievādīt</button> -->
+        <button class="button" type="button" onclick="emptySecond()" id="questionButton">Dzēst</button>
+    </div>
+
+    <div class = "question-box" id="questionRadio"> 
+        <div class = "question">Trešais jautājums:</div>
+        <br>
+        <div class="question-text">Dots apgalvojums:<br>Matemātika ir viegla</div>
+        <br>
+        <br>
+        <div>Izveleties vienu:</div>
+        <form id="question3">
+            <input type="radio" id="option1" name="option" value="option1" class="question-input">
+            <label for="option1">Patiesi</label><br>
+            <input type="radio" id="option2" name="option" value="option2" class="question-input">
+            <label for="option2">Aplami</label><br>
+        </form>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no3" class="yes/no3"></div>
+        <br>
+        <!-- <button class="button" onclick="checkThird()">Ievādīt</button> -->
+        <button class="button" type="button" onclick="emptyThird()" id="questionButton">Dzēst</button>
+    </div>
+    
+    <div class="question-box" id="questionDragDrop">
+        <div class="question">Ceturtais jautājums:</div>
+        <br>
+        <div class="question-text">Sakārto dotos skaitļus augošā secībā!</div>
+        <br>
+        <div id="placeholder1" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="placeholder2" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="placeholder3" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="placeholder4" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div>Atbilžu varianti:</div>
+        <div id="answers">
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer1">2</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer2">5</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer3">1</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer4">4</div>
+        </div>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no4"></div>
+        <br>
+        <!-- <button class="button" onclick="checkFourth()">Ievādīt</button> -->
+        <button class="button" type="button" onclick="emptyFourth()" id="questionButton">Dzēst</button>
+    </div>
+
+    <div class="question-box" id="questionCheckBox">
+        <div class="question">Piektais jautājums:</div>
+        <br>
+        <div class="question-text">Izvēlies visus skaitļus, kas ir pāra skaitļi</div>
+        <br>
+        <form id="questionForm">
+            <div class="answer">
+                <input type="checkbox" id="answer1" name="answer" value="3" class="question-input">
+                <label for="answer1">3</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer2" name="answer" value="4" class="question-input">
+                <label for="answer2">4</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer3" name="answer" value="7" class="question-input">
+                <label for="answer3">7</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer4" name="answer" value="8" class="question-input">
+                <label for="answer4">8</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer5" name="answer" value="9" class="question-input">
+                <label for="answer5">9</label>
+            </div>
+            <div class="answer">
+                <input type="checkbox" id="answer6" name="answer" value="12" class="question-input">
+                <label for="answer6">12</label>
+            </div>
+        </form>
+        <br>
+        <div id="yes/no5"></div>
+        <br>
+        <button class="button" type="button" onclick="emptyFifth()" id="questionButton">Dzēst</button>
+    </div>
+    
+    <div hidden="true" class="results" id="result">
+        <h2></h2>
+    </div>
+    <button class="button" onclick="submitTest(); disableInputs();">Iesniegt testu</button>
+    <button class="button" onclick="retryTest(); enableInputs();">Mēģināt vēlreiz</button>
 </body>
 </html>
