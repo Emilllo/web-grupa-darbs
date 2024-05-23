@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matemātikas Tests</title>
+    <style>
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .question-text {
+            font-size: 20px;
+        }
+
+        .question-box {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .result-window {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .answer {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: move;
+        }
+
+        .placeholder {
+            width: 150px;
+            height: 50px;
+            border: 2px dashed #ccc;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .submit-button:hover {
+            background-color: #2980b9;
+        }
+        #chronometer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            background-color: #3498db;
+            border: 2px solid blue;
+            padding: 10px;
+        }
+
+
+    </style>
+    <script src="test.js"></script>
+</head>
+
+<body>
+    <div id="chronometer"></div>
+    <script>
+        var chronometerDisplay = document.getElementById('chronometer')
+        var chronometer;
+        var seconds = 0;
+        var minutes = 45; // INPUT minutes, cik ilgi bus tests
+        document.addEventListener('DOMContentLoaded', setTimer(minutes))
+</script>
+<!-- "TextField", "DragDrop", "Buttons", "Radio", "CheckBox" -->
+    <div class="question-box" id="questionButtons">
+        <div class="question">1.Vai tu māki skaitīt?</div>
+        <br>
+        <div class="question-text">2+2</div>
+        <br>
+        <label for="result11">Ievadiet atbildi ar pogām:</label>
+        <input class="result-window" type="text" id="result11" readonly>
+        <br>
+        <div></div>
+        <br>
+        <button class="button" onclick="pressReplacing1('4')" id="questionButton">4</button>
+        <button class="button" onclick="pressReplacing1('5')" id="questionButton">5</button>
+        <button class="button" onclick="pressReplacing1('1')" id="questionButton">1</button>
+        <button class="button" onclick="pressReplacing1('16')" id="questionButton">16</button>
+        <br>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no1"></div>
+        <br>
+        
+        <button class="button" onclick="emptyFirst()" id="questionButton">Dzēst</button>
+    </div>
+
+    <div class="question-box" id="questionButtons">
+        <div class="question">2.Cik ābolu ir šeit?</div>
+        <br>
+        <img src="apples.png"/>
+        <br>
+        <label for="result21">Izvēlieties atbildi:</label>
+        <br>
+        <input class="result-window" type="text" id="result21" readonly>
+        <br>
+        <button class="button" onclick="pressReplacing2('4')" id="questionButton">4</button>
+        <button class="button" onclick="pressReplacing2('5')" id="questionButton">5</button>
+        <button class="button" onclick="pressReplacing2('1')" id="questionButton">1</button>
+        <button class="button" onclick="pressReplacing2('16')" id="questionButton">16</button>
+        <button class="button" onclick="pressReplacing2('6')" id="questionButton">6</button>
+        <br>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no2"></div>
+        <br>
+        
+        <button class="button" onclick="emptySecond()" id="questionButton">Dzēst</button>
+    </div>
+
+    <div class="question-box" id="questionCheckBox">
+        <div class="question">3.Izvēlies to skaitli, kas ir tikpat daudz, cik ir burtu tas nosaukumā!</div>
+        <br>
+        <label for="result31">Izvēlieties atbildi:</label>
+        <br>
+        <input type="checkbox" id="option31" name="option" value="1">
+        <label for="option31">1 (viens)</label><br>
+        <input type="checkbox" id="option32" name="option" value="2">
+        <label for="option32">2 (divi)</label><br>
+        <input type="checkbox" id="option33" name="option" value="3">
+        <label for="option33">3 (trīs)</label><br>
+        <input type="checkbox" id="option34" name="option" value="4">
+        <label for="option34">4 (četri)</label><br>
+        <input type="checkbox" id="option35" name="option" value="5">
+        <label for="option35">5 (pieci)</label><br>
+        <input type="checkbox" id="option36" name="option" value="6">
+        <label for="option36">6 (seši)</label><br>
+        <input type="checkbox" id="option37" name="option" value="7">
+        <label for="option37">7 (septiņi)</label><br>
+        <input type="checkbox" id="option38" name="option" value="8">
+        <label for="option38">8 (astoņi)</label><br>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no3"></div>
+        <br>
+       
+        <button class="button" onclick="emptyThird()" id="questionButton">Dzēst</button>
+    </div>
+
+    <div class="question-box" id="questionTextField">
+        <div class="question">4.Ievieto atbilstošu skaitli!</div>
+        <br>
+        <div class="question-text">Latvijā indīgo čūsku skaits:</div>
+        <input class="result-window" type="text" id="result41">
+        <br>
+        <div class="question-text">Vienai cilvēka rokai pirksti ir:</div>
+        <input class="result-window" type="text" id="result42">
+        <br>
+        <div class="question-text">Zilonim ilkņi ir:</div>
+        <input class="result-window" type="text" id="result43">
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no4"></div>
+        <br>
+        
+        <button class="button" onclick="emptyFourth()" id="questionButton">Dzēst</button>
+    </div>
+
+    <div class="question-box" id="questionTextField">
+        <div class="question">5.Ievadiet atbildes:</div>
+        <br>
+        <div class="question-text">VĀRNAI IR PAR <input class="result-window" type="text" id="result51"> KĀJĀM<input
+                class="result-window" type="text" id="result52">NEKĀ ZIRNEKLIM</div>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no5"></div>
+        <br>
+        
+        <button class="button" onclick="emptyFifth()" id="questionButton">Dzēst</button>
+    </div>
+    <div class="question-box" id="questionCheckBox">
+        <div class="question">6.jautājums:</div>
+        <br>
+        <div class="question-text">Izvēlies visus skaitļus, kas ir pāra skaitļi</div>
+    
+        <br>
+        <form action="/submit" method="get">
+            <input type="checkbox" id="number61" name="number61" value="3">
+            <label for="number61">3</label><br>
+    
+            <input type="checkbox" id="number62" name="number62" value="4" >
+            <label for="number62">4</label><br>
+    
+            <input type="checkbox" id="number63" name="number63" value="7">
+            <label for="number63">7</label><br>
+    
+            <input type="checkbox" id="number64" name="number64" value="8" >
+            <label for="number64">8</label><br>
+    
+        </form>
+    
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no6"></div>
+        <br>
+      
+        <button class="button" onclick="emptySixth()" id="questionButton">Dzēst</button>
+    </div>
+    
+    <div class="question-box" id="questionTextField">
+        <div class="question">7.jautājums:</div>
+        <br>
+        <div class="question-text">Kāds ir rezultāts, ja no 15 atņem 6?</div>
+        <br>
+        <input class="result-window" type="text" id="result71">
+    
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no7"></div>
+        <br>
+       
+        <button class="button" onclick="emptySeventh()" id="questionButton">Dzēst</button>
+    </div>
+
+   
+
+
+
+
+
+    
+    <div class="question-box" id="questionDragDrop">
+        <div class="question">8.jautājums:</div>
+        <br>
+        <div class="question-text">Sakārto skaitļus augošā secībā.</div>
+        <table>
+            <tr><td>
+                <div>1</div>
+                <div id="placeholder81" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                <br><td>
+                    <div>2</div>
+                    <div id="placeholder82" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                <br><td>
+                    <div>3</div>
+                    <div id="placeholder83" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                <br><td>
+                    <div>4</div>
+                    <div id="placeholder84" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <br></td></tr>
+        </table>
+        <div>Skaitļi: </div>
+        <div id="answers">
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer81">2</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer82">5</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer83">1</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer84">4</div>
+        </div>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no8"></div>
+        <br>
+       
+        <button class="button" onclick="emptyEighth()" id="questionButton">Dzēst</button>
+    </div>
+    
+    <div class="question-box" id="questionDragDrop">
+        <div class="question">9.jautājums:</div>
+        <br>
+        <div class="question-text"> Sakārto dzīvniekus pēc to izmēra, sākot no mazākā.</div>
+        <div>Mazākais </div>
+        <div id="placeholder91" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <br>
+        <div> </div>
+        <div id="placeholder92" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <br>
+        <div> </div>
+        <div id="placeholder93" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <br>
+    
+        <div id="placeholder94" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div>Lielākais</div>
+        <br>
+    
+        <div>Dzīvnieki: </div>
+        <div id="answers2">
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer91">Zilonis</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer92">Kaķis</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer93">Suns</div>
+            <div class="answer" draggable="true" ondragstart="drag(event)" id="answer94">Pele</div>
+        </div>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no9"></div>
+        <br>
+        
+        <button class="button" onclick="emptyNinth()" id="questionButton">Dzēst</button>
+    </div>
+    
+    <div class="question-box" id="questionCheckBox">
+        <div class="question">10.jautājums:</div>
+        <br>
+        <div class="question-text"> Izvēlies visus skaitļus, kas lielāki par 15.</div>
+    
+        <br>
+        <form action="/submit" method="get">
+            <input type="checkbox" id="number101" name="number101" value="10">
+            <label for="number101">10</label><br>
+    
+            <input type="checkbox" id="number102" name="number102" value="16" >
+            <label for="number102">16</label><br>
+    
+            <input type="checkbox" id="number103" name="number103" value="20">
+            <label for="number103">20</label><br>
+    
+            <input type="checkbox" id="number104" name="number104" value="14" >
+            <label for="number104">14</label><br>
+    
+            <input type="checkbox" id="number105" name="number105" value="18" >
+            <label for="number105">18</label><br>
+    
+        </form>
+    
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no10"></div>
+        <br>
+        
+        <button class="button" onclick="emptyTenth()" id="questionButton">Dzēst</button>
+    </div>
+    
+    <div class="question-box" id="questionTextField">
+        <div class="question">11.jautājums:</div>
+        <br>
+        <div class="question-text">Kādas funkcijas grafiks tas ir? Ierakstiet pareizo variantu (cos, sin, tg ctg)</div>
+        <br>
+    <img src="https://mathbitsnotebook.com/Algebra2/TrigGraphs/otherg91.gif" width="180"><br><br>
+    
+     <input class="result-window" type="text" id="result111" required>
+    
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no11"></div>
+        <br>
+    
+        
+    <button class="button" onclick="emptyEleventh()" id="questionButton">Dzēst</button>
+    
+    </div>
+    
+    
+    <div class="question-box" id="questionRadio">
+        <div class="question">12.jautājums:</div><br>
+        <div class="question-text">Kāds ir kuba tilpums ja malas garumu apzīmē ar a? Izvēlieties pareizo variantu.</div><br>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Necker_cube.svg/800px-Necker_cube.svg.png" width="180"><br>
+        <input type="radio" name="Status" value="a" id="status1">a<br>
+        <input type="radio" name="Status" value="a^2" id="status2">a^2<br>
+        <input type="radio" name="Status" value="6a" id="status3">6a<br>
+        <input type="radio" name="Status" value="a^3" id="status4">a^3<br>
+        <br>
+        <div>Komentārs:</div>
+        <div id="yes/no12"></div>
+        <br>
+        
+        <button class="button" onclick="emptyTwelfth()" id="questionButton">Dzēst</button>
+    </div>
+    
+    <div hidden="true" class="results" id="result">
+        <h2></h2>
+    </div>
+
+    <button class="button" onclick="submitTest()">Iesniegt testu</button>
+    <button class="button" onclick="retryTest()">Mēģināt vēlreiz</button>
+</body>
+</html>
