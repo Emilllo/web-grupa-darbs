@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests</title>
+    <link rel = "">
+    <style>
+        .question{
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .question-text{
+            font-size: 20px;
+        }
+
+        .question-box {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .result-window {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .answer {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: move;
+        }
+        .placeholder {
+            width: 150px;
+            height: 50px;
+            border: 2px dashed #ccc;
+            margin: 5px;
+            display: inline-block;
+        }
+        .placeholderHorizontal {
+            width: 150px;
+            height: 50px;
+            border: 2px dashed #ccc;
+            margin: 5px;
+            display: inline-block;
+        }
+        #chronometer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            background-color: #3498db;
+            border: 2px solid blue;
+            padding: 10px;
+        }
+
+    </style>
+    <link rel="stylesheet" href="left-sidebar.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="chronometer"></div>
+    <script>
+        var chronometerDisplay = document.getElementById('chronometer')
+        var chronometer;
+        var seconds = 0;
+        var minutes = 45; // INPUT minutes, cik ilgi bus tests
+        document.addEventListener('DOMContentLoaded', setTimer(minutes))
+</script>
+    <div class="sidebar">
+        <div class="side-text"><p><a href="#1question">1. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#2question">2. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#3question">3. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#4question">4. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#5question">5. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#6question">6. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#7question">7. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#8question">8. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#9question">9. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#10question">10. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#11question">11. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#12question">12. jautājums</a></p></div>
+        <div class="side-text"><p><a href="#13question">13. jautājums</a></p></div>
+    </div>
+
+    <div class="main">
+        <div class="question-box" id="questionDragDrop">
+            <div class="question" id="1question">1.jautājums:</div>
+            <br>
+            <div class="question-text">Izvēlies pareizās atbildes!</div>
+            <br>
+            <div class="question-text">a²-2ab+b²=</div>
+            <div id="placeholder1" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="question-text">b²+2ab+a²=</div>
+            <div id="placeholder2" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="question-text">a²-b²=</div>
+            <div id="placeholder3" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div>Atbilžu varianti:</div>
+            <div id="answers">
+                <div class="answer" draggable="true" ondragstart="drag(event)" id="answer1">(b+a)²</div>
+                <div class="answer" draggable="true" ondragstart="drag(event)" id="answer2">(a-b)(b+b)</div>
+                <div class="answer" draggable="true" ondragstart="drag(event)" id="answer3">(a-b)²</div>
+                <div class="answer" draggable="true" ondragstart="drag(event)" id="answer4">(a+a)²</div>
+                <div class="answer" draggable="true" ondragstart="drag(event)" id="answer5">(a-b)(a+b)</div>
+                <div class="answer" draggable="true" ondragstart="drag(event)" id="answer6">(b-a)²</div>
+            </div>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no1"></div>
+            <br>
+            <button class="button" onclick="emptyFirst()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class = "question-box" id="questionTextField">
+            <div class = "question" id="2question">2.jautājums:</div>
+            <br>
+            <div class="question-text">Atrisini vienādojumu!</div>
+            <br>
+            <div class="question-text">3x² + 6x = 0</div>
+            <br>
+            <label for="result21">x₁ = </label>
+            <input class="result-window" type="text" id="result21" required class="question-input">
+            <br>
+            <label for="result22">x₂ = </label>
+            <input class="result-window" type="text" id="result22" required class="question-input">
+            <br>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no2"></div>
+            <br>
+            <button class="button" onclick="emptySecond()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class = "question-box" id="questionTextField">
+            <div class = "question" id="3question">3.jautājums:</div>
+            <br>
+            <div class="question-text">Sadali reizinātājos kvadrāttrinomu 5x² - 9x + 4</div>
+            <br>
+            <input class="result-window" type="text" id="result31" required class="question-input">
+            <label for="result32">(x - </label>
+            <input class="result-window" type="text" id="result32" required class="question-input">
+            <label for="result33">)(x - </label>
+            <input class="result-window" type="text" id="result33" required class="question-input">
+            <label>)</label>
+            <br>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no3"></div>
+            <br>
+            <button class="button" onclick="emptyThird()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class = "question-box" id="questionRadio">
+            <div class = "question" id="4question">4.jautājums:</div>
+            <br>
+            <div class="question-text">Pieņemsim, ka t, l un v ir naturāli skaitļi. Zināms, ka tᵃ=v.Kurā gadījumā pareizi pierakstīta sakne un tās vērtība?</div>
+            <br>
+            <br>
+            <div>Izveleties vienu:</div>
+            <form id="question3">
+                <input type="radio" id="option41" name="option" value="option41" class="question-input">
+                <label for="option41">ᵗ√a = v</label><br>
+                <input type="radio" id="option42" name="option" value="option42" class="question-input">
+                <label for="option42">ᵃ√v = t</label><br>
+                <input type="radio" id="option43" name="option" value="option43" class="question-input">
+                <label for="option43">ᵛ√a = t</label><br>
+                <input type="radio" id="option44" name="option" value="option44" class="question-input">
+                <label for="option44">ᵃ√t = v</label><br>
+            </form>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no4" class="yes/no4"></div>
+            <br>
+            <button class="button" onclick="emptyFourth()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class="question-box" id="questionCheckBox">
+            <div class="question" id="5question">5.jautājums:</div>
+            <br>
+            <div class="question-text">Kurā dotā izteiksme ir reizinājums?</div>
+            <br>
+            <form id="questionForm">
+                <div class="answer">
+                    <input type="checkbox" id="answer51" name="answer" value="−2(t−10)+9" class="question-input">
+                    <label for="answer51">−2(t−10)+9</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer52" name="answer" value="2t(t−10)" class="question-input">
+                    <label for="answer52">2t(t−10)</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer53" name="answer" value="−2t³+9t²" class="question-input">
+                    <label for="answer53">−2t³+9t²</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer54" name="answer" value="10t²⋅9t" class="question-input">
+                    <label for="answer54">10t²⋅9t</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer55" name="answer" value="2+9(2t−10)" class="question-input">
+                    <label for="answer55">2+9(2t−10)</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer56" name="answer" value="(9t+10)2t" class="question-input">
+                    <label for="answer56">(9t+10)2t</label>
+                </div>
+            </form>
+            <br>
+            <div id="yes/no5"></div>
+            <br>
+            <button class="button" onclick="emptyFifth()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class="question-box" id="questionButtons">
+            <div class="question" id="6question">6.jautājums:</div>
+            <br>
+            <div class="question-text">Durvju kodu atslēgai ir 6 taustiņi – apzīmēti ar burtu simboliem A, B, C, D, E, F (sk. att.). Kodu var veidot no k dažādiem burtu simboliem (k iespējamās vērtības ir 1; 2; 3; 4; 5). Lai atvērtu durvis, uzstādītajam kodam atbilstošie taustiņi jānospiež vienlaicīgi.
+                Cik dažādu kodu var izveidot, ja k = 3? (ievēro – piemēram, AE un EA ir viens un tas pats kods)
+                </div>
+            <br>
+            <label for="result61">Jūsu atbilde:</label>
+            <input class="result-window" type="text" id="result61" readonly>
+            <br>
+            <div></div>
+            <br>
+            <button class="button" onclick="press61('1')" id="questionButton">1</button>
+            <button class="button" onclick="press61('2')" id="questionButton">2</button>
+            <button class="button" onclick="press61('3')" id="questionButton">3</button>
+            <button class="button" onclick="press61('4')" id="questionButton">4</button>
+            <button class="button" onclick="press61('5')" id="questionButton">5</button>
+            <button class="button" onclick="press61('6')" id="questionButton">6</button>
+            <button class="button" onclick="press61('7')" id="questionButton">7</button>
+            <button class="button" onclick="press61('8')" id="questionButton">8</button>
+            <button class="button" onclick="press61('9')" id="questionButton">9</button>
+            <button class="button" onclick="press61('0')" id="questionButton">0</button>
+            <br>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no6"></div>
+            <br>
+            <button class="button" onclick="emptySixth()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class="question-box" id="questionCheckBox">
+            <div class="question" id="7question">7.jautājums:</div>
+            <br>
+            <div class="question-text">Kuras no skaitļu virknēm varētu būt aritmētiskā progresija?</div>
+            <br>
+            <img src="progresija.png">
+            <form id="questionForm">
+                <div class="answer">
+                    <input type="checkbox" id="answer71" name="answer" value="1" class="question-input">
+                    <label for="answer71">1</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer72" name="answer" value="2" class="question-input">
+                    <label for="answer72">2</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer73" name="answer" value="3" class="question-input">
+                    <label for="answer73">3</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer74" name="answer" value="4" class="question-input">
+                    <label for="answer74">4</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer75" name="answer" value="Visas" class="question-input">
+                    <label for="answer75">Visas</label>
+                </div>
+            </form>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no7"></div>
+            <br>
+            <button class="button" onclick="emptySeventh()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class = "question-box" id="questionTextField">
+            <div class = "question" id="8question">8.jautājums:</div>
+            <br>
+            <div class="question-text">Atvasini funkciju f(x)=(4x+8)²</div>
+            <br>
+            <label for="result81">f'(x) = </label>
+            <input class="result-window" type="text" id="result81" required class="question-input">
+            <label for="result82">x + </label>
+            <input class="result-window" type="text" id="result82" required class="question-input">
+            <br>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no8"></div>
+            <br>
+            <button class="button" onclick="emptyEighth()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class="question-box" id="questionButtons">
+            <div class="question" id="9question">9.jautājums:</div>
+            <br>
+            <div class="question-text">Punkts pārvietojas taisnvirziena kustībā pēc likuma s(t)=3t³+8t²+8 (m). 
+                Aprēķini punkta ātrumu laika momentā t=6 sekundes.</div>
+            <br>
+            <label for="result91">Jūsu atbilde:</label>
+            <input class="result-window" type="text" id="result91" readonly>
+            <br>
+            <div></div>
+            <br>
+            <button class="button" onclick="press91('1')" id="questionButton">1</button>
+            <button class="button" onclick="press91('2')" id="questionButton">2</button>
+            <button class="button" onclick="press91('3')" id="questionButton">3</button>
+            <button class="button" onclick="press91('4')" id="questionButton">4</button>
+            <button class="button" onclick="press91('5')" id="questionButton">5</button>
+            <button class="button" onclick="press91('6')" id="questionButton">6</button>
+            <button class="button" onclick="press91('7')" id="questionButton">7</button>
+            <button class="button" onclick="press91('8')" id="questionButton">8</button>
+            <button class="button" onclick="press91('9')" id="questionButton">9</button>
+            <button class="button" onclick="press91('0')" id="questionButton">0</button>
+            <br>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no9"></div>
+            <br>
+            <button class="button" onclick="emptyNinth()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class = "question-box" id="questionRadio">
+            <div class = "question" id="10question">10.jautājums:</div>
+            <br>
+            <div class="question-text">Atzīmē pareizo funkcijas y=1/(sin5x)⁶ atvasinājumu!</div>
+            <br>
+            <br>
+            <div>Izveleties vienu:</div>
+            <form id="question3">
+                <input type="radio" id="option101" name="option" value="option101" class="question-input">
+                <label for="option101">30cos5x/(sin6x)⁷</label><br>
+                <input type="radio" id="option102" name="option" value="option102" class="question-input">
+                <label for="option102">-30cos5x/(sin6x)⁷</label><br>
+                <input type="radio" id="option103" name="option" value="option103" class="question-input">
+                <label for="option103">-1/6cos5x</label><br>
+                <input type="radio" id="option104" name="option" value="option104" class="question-input">
+                <label for="option104">4/(sin5x)⁷cos5x</label><br>
+            </form>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no10" class="yes/no10"></div>
+            <br>
+            <button class="button" onclick="emptyTenth()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class = "question-box" id="questionTextField">
+            <div class = "question" id="11question">11.jautājums:</div>
+            <br>
+            <div class="question-text">Nosaki funkcijas f(x)=−34,58 atvasinājumu!</div>
+            <br>
+            <label for="result111">f'(x) = </label>
+            <input class="result-window" type="text" id="result111" required class="question-input">
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no11" class="yes/no11"></div>
+            <br>
+            <button class="button" onclick="emptyEleventh()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class = "question-box" id="questionRadio">
+            <div class = "question" id="12question">12.jautājums:</div>
+            <br>
+            <div class="question-text">Zīmējumos dots funkcijas y=f(x) grafiks, kurā zilā krāsā izcelta kāda grafika daļa. Papildini teikumu!</div>
+            <br>
+            <img src="dilstosais-grafiks.png"/>
+            <br>
+            <div>Iekrāsotajos intervālos funkcija:</div>
+            <form id="question3">
+                <input type="radio" id="option121" name="option" value="option121" class="question-input">
+                <label for="option121">ir dilstoša</label><br>
+                <input type="radio" id="option122" name="option" value="option122" class="question-input">
+                <label for="option122">ir augoša</label><br>
+                <input type="radio" id="option123" name="option" value="option123" class="question-input">
+                <label for="option123">ir lielāka par 0</label><br>
+                <input type="radio" id="option124" name="option" value="option124" class="question-input">
+                <label for="option124">ir mazāka par 0</label><br>
+            </form>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no12" class="yes/no12"></div>
+            <br>
+            <button class="button" onclick="emptyTwelfth()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class="question-box" id="questionCheckBox">
+            <div class="question" id="13question">13.jautājums:</div>
+            <br>
+            <div class="question-text">Izvēlies visus intervālus, kuros funkcija ir tikai augoša!</div>
+            <br>
+            <img src="dilstosais-grafiks2.png"/>
+            <br>
+            <form id="questionForm">
+                <div class="answer">
+                    <input type="checkbox" id="answer131" name="answer" value="(−1;2)" class="question-input">
+                    <label for="answer131">(−1;2)</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer132" name="answer" value="(6;11)" class="question-input">
+                    <label for="answer132">(6;11)</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer133" name="answer" value="(−10;−7)" class="question-input">
+                    <label for="answer133">(−10;−7)</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer134" name="answer" value="(−7;6)" class="question-input">
+                    <label for="answer134">(−7;6)</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer135" name="answer" value="(−5;11)" class="question-input">
+                    <label for="answer135">(−5;11)</label>
+                </div>
+                <div class="answer">
+                    <input type="checkbox" id="answer136" name="answer" value="(−7;−5)" class="question-input">
+                    <label for="answer136">(−7;−5)</label>
+                </div>
+            </form>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no13" class="yes/no13"></div>
+            <br>
+            <button class="button" onclick="emptyThirteenth()" id="questionButton">Dzēst</button>
+        </div>
+
+        <div class="question-box" id="questionDragDrop">
+            <div class="question" id="14question">14.jautājums:</div>
+            <br>
+            <div class="question-text">Dota funkcija f(x)=−34,58</div>
+        <div class="question-text">Turpini teikumu!</div>
+            <div class="question-text">Jebkurā šīs funkcijas grafika punktā novilktā pieskare...</div>
+            <div id="placeholder141" class="placeholder" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <br>
+            <div id="answers2">
+                <div class="answer" draggable="true" ondragstart="drag(event)" id="answer141">neeksiste</div>
+                <div class="answer" draggable="true" ondragstart="drag(event)" id="answer142">ar Ox asi veido 0 grādu leņķi</div>
+                <div class="answer" draggable="true" ondragstart="drag(event)" id="answer143">ir perpendikulāras dotās funkcijas grafikam</div>
+            </div>
+            <br>
+            <div>Komentārs:</div>
+            <div id="yes/no14" class="yes/no14"></div>
+            <br>
+            <button class="button" onclick="emptyFourteenth()" id="questionButton">Dzēst</button>
+        </div>
+        
+        <div hidden="true" class="results" id="result">
+            <h2></h2>
+        </div>
+
+        <button class="button" onclick="submitTest()">Iesniegt testu</button>
+        <button class="button" onclick="retryTest()">Mēģināt vēlreiz</button>
+    </div>
+</body>
+</html>
